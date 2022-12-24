@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Author;
 use App\Models\Course;
 use App\Models\Platform;
+use App\Models\Review;
 use App\Models\Series;
 use App\Models\Topic;
 use App\Models\User;
@@ -27,6 +28,12 @@ class DatabaseSeeder extends Seeder
             //     'name' => 'Test User',
             //     'email' => 'test@example.com',
             // ]);
+            User::create([
+               'name' => 'Admin',
+                'email' => 'k.kawsar0095@gmail.com',
+                'password' => bcrypt('password'),
+                'type' => 1
+            ]);
             $series = [
                 [
                     'name' => 'PHP',
@@ -55,7 +62,8 @@ class DatabaseSeeder extends Seeder
             $topics = ['Eloquent', 'Validation', 'Authentication', 'Testing', 'Refactoring'];
             foreach ($topics as $topic){
                 Topic::create([
-                    'name'=> $topic
+                    'name'=> $topic,
+                    'slug' => strtolower(str_replace(' ', '-', $topic))
                 ]);
             }
 
@@ -66,15 +74,11 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
 
-            $authors = ['Rasel Ahmed', 'Sumit Saha', 'Jhankar Mahabub', 'Anisul Islam'];
-            foreach ($authors as $author){
-                Author::create([
-                    'name'=> $author
-                ]);
-            }
-
             // create 50 users
             User::factory(50)->create();
+
+            // create 10 authors
+            Author::factory(10)->create();
 
             // create 100 courses
             Course::factory(100)->create();
@@ -90,6 +94,7 @@ class DatabaseSeeder extends Seeder
                 $series = Series::all()->random(rand(1, 3))->pluck('id')->toArray();
                 $course->series()->attach($series);
             }
+            Review::factory(120)->create();
         }
     }
 }

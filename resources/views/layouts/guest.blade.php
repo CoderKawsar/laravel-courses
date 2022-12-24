@@ -29,8 +29,21 @@
 
                     <!--Signup&login button-->
                     <div class="flex items-center">
-                        <a href="#" class="text-sm font-medium text-gray-500 hover:text-gray-900">Sign in</a>
-                        <a href="#" class="ml-8 inline-flex items-center justify-center rounded border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-500">Sign up</a>
+                        @if(!Auth::check())
+                            <a href="{{route('login')}}" class="text-sm font-medium text-gray-500 hover:text-gray-900">Sign in</a>
+                            <a href="{{route('register')}}" class="ml-8 inline-flex items-center justify-center rounded border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-500">Sign up</a>
+                        @else
+                            <p>Welcome: {{Auth::user()->name}}</p>
+                            @if(Auth::user()->type === 1)
+                                <a href="{{route('login')}}" class="bg-gray-400 hover:bg-gray-600 rounded ml-4 px-4 py-2 text-white">Dashboard</a>
+                            @else
+                                <a href="#" class="bg-gray-400 hover:bg-gray-600 rounded ml-4 px-4 py-2 text-white">Submit a course</a>
+                            @endif
+                            <form action="{{route('logout')}}" method="POST">
+                                @csrf
+                                <button type="submit" class="ml-8 inline-flex items-center justify-center rounded border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-500">Log out</button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
