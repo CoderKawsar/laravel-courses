@@ -22,7 +22,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/courses', [CoursesController::class, 'index'])->name('courses');
 Route::get('/course/{slug}', [CoursesController::class, 'show'])->name('course');
 
-Route::get('/topic/{slug}', [TopicController::class, 'index'])->name('topics');
+Route::get('/{archiveType}/{slug}', [HomeController::class, 'archive'])->name('archive');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

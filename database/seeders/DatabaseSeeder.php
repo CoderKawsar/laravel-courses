@@ -37,24 +37,29 @@ class DatabaseSeeder extends Seeder
             $series = [
                 [
                     'name' => 'PHP',
+                    'slug' => 'php',
                     'image' => 'https://cdn.cdnlogo.com/logos/p/79/php.svg'
                 ],
                 [
                     'name' => 'JavaScript',
+                    'slug' => 'javascript',
                     'image' => 'https://cdn.cdnlogo.com/logos/j/44/javascript.svg'
                 ],
                 [
                     'name' => 'Laravel',
+                    'slug' => 'laravel',
                     'image' => 'https://cdn.cdnlogo.com/logos/l/56/laravel-wordmark.svg'
                 ],
                 [
-                    'name' => 'Python',
+                    'name' => 'Vue.js',
+                    'slug' => 'vuejs',
                     'image' => 'https://cdn.cdnlogo.com/logos/p/3/python.svg'
                 ]
             ];
             foreach ($series as $item){
                 Series::create([
                     'name'=> $item['name'],
+                    'slug' => $item['slug'],
                     'image' => $item['image']
                 ]);
             }
